@@ -9,7 +9,7 @@ const Post = ({ post, user, setRefresh }) => {
   const [newMessage, setNewMessage] = useState("");
 
   useEffect(() => {
-    if (post.author === user._id) {
+    if (post.author._id === user._id) {
       setIsAuthor(true);
     } else {
       setIsAuthor(false);
@@ -39,7 +39,20 @@ const Post = ({ post, user, setRefresh }) => {
   return (
     <div className="card">
       <div className="card-header">
-        <h3>{post.author}</h3>
+        <h3>
+          <span>{post.author.account.username}</span>
+          <img
+            style={{
+              height: "40px",
+              width: "40px",
+              borderRadius: "50%",
+              objectFit: "cover",
+            }}
+            src={post.author.account.avatar.secure_url}
+            alt="pic"
+          />
+        </h3>
+
         <p>posté le {dateFormater(post.createdAt)}</p>
       </div>
       {isEdit ? (

@@ -3,7 +3,7 @@ import axios from "axios";
 
 const DeletePost = ({ postId }) => {
   const handleDelete = () => {
-    axios.delete("http://localhost:5600/post/" + postId);
+    axios.delete("http://localhost:5000/post/" + postId);
   };
 
   return (

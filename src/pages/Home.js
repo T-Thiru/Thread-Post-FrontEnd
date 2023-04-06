@@ -8,7 +8,9 @@ const Home = ({ user, setUser, setToken, token }) => {
   return (
     <div className="app-container">
       <div className="profile">
-        <h1>Bonjour {user?.account?.username}</h1>
+        <h1>
+          Bonjour <span className="username">{user?.account?.username}</span>
+        </h1>
         <img
           className="avatar"
           src={user.account?.avatar?.secure_url}

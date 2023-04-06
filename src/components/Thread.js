@@ -4,7 +4,7 @@ import Post from "./Post";
 
 const Thread = ({ user }) => {
   const [posts, setPosts] = useState([]);
-  const [refresh, setRefresh] = useState(null);
+  const [refresh, setRefresh] = useState(0);
 
   useEffect(() => {
     axios.get("http://localhost:5000/post/").then((res) => setPosts(res.data));
