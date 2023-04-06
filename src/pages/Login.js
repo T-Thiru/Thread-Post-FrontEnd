@@ -71,7 +71,7 @@ const Login = ({ setUser, setToken }) => {
         <Button variant="contained" type="submit">
           Se connecter
         </Button>
-        {/* <Link to="/signup">Pas encore de compte? Inscris-toi !</Link> */}
+        <Link to="/signup">Pas encore de compte? Inscris-toi !</Link>
       </form>
       <p style={{ color: "red" }}>{errorLogIn}</p>
     </div>

@@ -108,7 +108,7 @@ const SignUp = ({ setUser, setToken }) => {
           <Button variant="contained" type="submit">
             S'inscrire
           </Button>
-          {/* <Link to="/login">Tu as deja un compte? connecte-toi!</Link> */}
+          <Link to="/">Tu as deja un compte? connecte-toi!</Link>
           <p style={{ color: "red" }}>{errorSignIn}</p>
         </form>
       </div>
