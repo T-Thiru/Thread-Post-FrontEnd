@@ -7,13 +7,16 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import SignUP from "./pages/SignUp";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getUser } from "./feature/user.slice";
 const App = () => {
-  const [user, setUser] = useState({});
+  // const [user, setUser] = useState({});
   const [token, setToken] = useState(Cookies.get("token") || null);
   const [isLoading, setIsLoading] = useState(true);
+  const dispatch = useDispatch;
 
-  console.log(token);
-  console.log(user);
+  // console.log(token);
+  // console.log(user);
 
   useEffect(() => {
     if (token) {
@@ -21,27 +24,21 @@ const App = () => {
         .post("http://localhost:5000/user/user", {
           token: Cookies.get("token"),
         })
-        .then((res) => setUser(res.data));
+        .then((res) => dispatch(getUser(res.data)));
     }
     setIsLoading(false);
-  }, [token]);
+  }, [token, dispatch]);
 
   return isLoading ? (
     <p>LOADING...</p>
   ) : (
     <Router>
       {token ? (
-        <Home user={user} setToken={setToken} setUser={setUser} token={token} />
+        <Home setToken={setToken} token={token} />
       ) : (
         <Routes>
-          <Route
-            path="/"
-            element={<Login setUser={setUser} setToken={setToken} />}
-          />
-          <Route
-            path="/signup"
-            element={<SignUP setUser={setUser} setToken={setToken} />}
-          />
+          <Route path="/" element={<Login setToken={setToken} />} />
+          <Route path="/signup" element={<SignUP setToken={setToken} />} />
         </Routes>
       )}
     </Router>

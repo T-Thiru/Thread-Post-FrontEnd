@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { dislike, like } from "../feature/post.slice";
 
-const LikePost = ({ post, userId, setRefresh }) => {
+const LikePost = ({ post, userId }) => {
   const [userLiked, setUserLiked] = useState(false);
-
+  const dispatch = useDispatch();
   useEffect(() => {
     if (post.likes) {
       if (post.likes.includes(userId)) {
@@ -16,18 +18,16 @@ const LikePost = ({ post, userId, setRefresh }) => {
 
   const likePost = () => {
     axios.patch(`http://localhost:5000/post/like-post/${post._id}`, { userId });
-
+    dispatch(like([userId, post._id]));
     setUserLiked(true);
-    setRefresh(2);
   };
 
   const dislikePost = () => {
     axios.patch(`http://localhost:5000/post/dislike-post/${post._id}`, {
       userId,
     });
-
+    dispatch(dislike([userId, post._id]));
     setUserLiked(false);
-    setRefresh(3);
   };
 
   return (

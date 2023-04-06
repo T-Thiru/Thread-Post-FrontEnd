@@ -3,8 +3,12 @@ import Cookies from "js-cookie";
 
 import NewPost from "../components/NewPost";
 import Thread from "../components/Thread";
+import { useDispatch, useSelector } from "react-redux";
+import { getUser } from "../feature/user.slice";
 
-const Home = ({ user, setUser, setToken, token }) => {
+const Home = ({ setToken, token }) => {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.userData);
   return (
     <div className="app-container">
       <div className="profile">
@@ -18,12 +22,12 @@ const Home = ({ user, setUser, setToken, token }) => {
           onClick={() => {
             Cookies.remove("token");
             setToken(null);
-            setUser(null);
+            dispatch(getUser({}));
           }}
         />
       </div>
-      <NewPost user={user} token={token} />
-      <Thread user={user} token={token} />
+      <NewPost token={token} />
+      <Thread token={token} />
     </div>
   );
 };

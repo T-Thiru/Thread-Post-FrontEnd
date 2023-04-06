@@ -5,14 +5,17 @@ import TextField from "@mui/material/TextField";
 import axios from "axios";
 import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { getUser } from "../feature/user.slice";
 // import { useNavigate } from "react-router-dom";
 
-const SignUp = ({ setUser, setToken }) => {
+const SignUp = ({ setToken }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorSignIn, setErrorSignIn] = useState("");
   const [profilPic, setProfilPic] = useState();
+  const dispatch = useDispatch();
 
   // const navigate = useNavigate();
 
@@ -38,7 +41,7 @@ const SignUp = ({ setUser, setToken }) => {
       // console.log(resToken.data);
       if (resToken.data) {
         setToken(resToken.data.token);
-        setUser(resToken.data);
+        dispatch(getUser(resToken.data));
         Cookies.set("token", resToken.data.token, { expires: 2 });
         // navigate("/");
         setErrorSignIn("");

@@ -2,26 +2,30 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import DeletePost from "./DeletePost";
 import LikePost from "./LikePost";
+import { useDispatch, useSelector } from "react-redux";
+import { editPost } from "../feature/post.slice";
 
-const Post = ({ post, user, setRefresh }) => {
+const Post = ({ post }) => {
   const [isAuthor, setIsAuthor] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
   const [newMessage, setNewMessage] = useState("");
+  const user = useSelector((state) => state.user.userData);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    if (post.author._id === user._id) {
+    if (post.author._id === user.id) {
       setIsAuthor(true);
     } else {
       setIsAuthor(false);
     }
-  }, [user, post.author]);
+  }, [user, post]);
 
   const handleEdit = () => {
     if (newMessage) {
-      axios.put("http://localhost:5000/post/" + post._id, {
+      axios.put(`http://localhost:5000/post/${post._id}`, {
         message: newMessage,
       });
-      setRefresh(1);
+      dispatch(editPost([newMessage, post._id]));
     }
   };
 
@@ -40,7 +44,7 @@ const Post = ({ post, user, setRefresh }) => {
     <div className="card">
       <div className="card-header">
         <h3>
-          <span>{post.author.account.username}</span>
+          <span>{post.author?.account?.username}</span>
           <img
             style={{
               height: "40px",
@@ -48,7 +52,7 @@ const Post = ({ post, user, setRefresh }) => {
               borderRadius: "50%",
               objectFit: "cover",
             }}
-            src={post.author.account.avatar.secure_url}
+            src={post.author?.account?.avatar?.secure_url}
             alt="pic"
           />
         </h3>
@@ -74,7 +78,7 @@ const Post = ({ post, user, setRefresh }) => {
         <p>{newMessage ? newMessage : post.message}</p>
       )}
       <div className="icons-part">
-        <LikePost post={post} userId={user._id} setRefresh={setRefresh} />
+        <LikePost post={post} userId={user.id} />
         {isAuthor && (
           <div className="update-delete-icons">
             <span
