@@ -18,7 +18,7 @@ const Thread = () => {
     } catch (error) {
       console.log(error.message);
     }
-  }, [dispatch]);
+  }, [dispatch, posts]);
 
   return (
     <div className="thread-container">
