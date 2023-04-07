@@ -26,14 +26,11 @@ const Login = ({ setToken }) => {
         "http://localhost:5000/user/login",
         logIndetail
       );
-      console.log(resToken.data);
+      // console.log(resToken.data);
       if (resToken.data) {
         dispatch(getUser(resToken.data));
         setToken(resToken.data.token);
         Cookies.set("token", resToken.data.token, { expires: 2 });
-        Cookies.set("avatar", resToken.data.account?.avatar?.secure_url, {
-          expires: 2,
-        });
         // navigate("/");
         setErrorLogIn("");
       }

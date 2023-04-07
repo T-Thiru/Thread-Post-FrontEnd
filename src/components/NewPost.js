@@ -13,7 +13,7 @@ const NewPost = ({ token }) => {
 
     const data = {
       message,
-      author: user.id,
+      author: user._id,
       // ID provisoir
       // _id: Date.now(),
     };

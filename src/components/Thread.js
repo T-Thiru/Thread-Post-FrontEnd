@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Post from "./Post";
 import { useDispatch, useSelector } from "react-redux";
 import { getPosts } from "../feature/post.slice";
@@ -11,10 +11,14 @@ const Thread = () => {
   const posts = useSelector((state) => state.posts.postsData);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:5000/post/")
-      .then((res) => dispatch(getPosts(res.data)));
-  }, [dispatch, posts]);
+    try {
+      axios
+        .get("http://localhost:5000/post/")
+        .then((res) => dispatch(getPosts(res.data)));
+    } catch (error) {
+      console.log(error.message);
+    }
+  }, [dispatch]);
 
   return (
     <div className="thread-container">

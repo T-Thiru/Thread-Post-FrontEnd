@@ -13,7 +13,7 @@ const Post = ({ post }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (post.author._id === user.id) {
+    if (post.author._id === user._id) {
       setIsAuthor(true);
     } else {
       setIsAuthor(false);
@@ -78,7 +78,7 @@ const Post = ({ post }) => {
         <p>{newMessage ? newMessage : post.message}</p>
       )}
       <div className="icons-part">
-        <LikePost post={post} userId={user.id} />
+        <LikePost post={post} userId={user._id} />
         {isAuthor && (
           <div className="update-delete-icons">
             <span

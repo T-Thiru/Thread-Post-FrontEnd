@@ -1,15 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
-
+import axios from "axios";
 import NewPost from "../components/NewPost";
 import Thread from "../components/Thread";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../feature/user.slice";
 
 const Home = ({ setToken, token }) => {
+  const [isLoading, setIsLoading] = useState(true);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.userData);
-  return (
+
+  useEffect(() => {
+    try {
+      if (Cookies.get("token")) {
+        axios
+          .post("http://localhost:5000/user/user", {
+            token: Cookies.get("token"),
+          })
+          .then((res) => dispatch(getUser(res.data)));
+      }
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error.message);
+    }
+  }, [token, dispatch]);
+
+  return isLoading ? (
+    <p>LOADING...</p>
+  ) : (
     <div className="app-container">
       <div className="profile">
         <h1>
