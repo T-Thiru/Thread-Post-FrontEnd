@@ -76,7 +76,6 @@ const SignUp = ({ setToken }) => {
             }}
           />
           <label>
-            {" "}
             <h3>Photo profil:</h3>
           </label>
           <TextField

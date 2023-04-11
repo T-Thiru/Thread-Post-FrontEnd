@@ -71,6 +71,11 @@ a {
   padding: 20px;
   display: flex;
 }
+.new-post {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
 textarea {
   background: none;
   resize: none;
@@ -86,7 +91,7 @@ input[type="submit"] {
   border: 1px solid rgb(10, 10, 10);
   margin-left: 4px;
   width: 100px;
-  background: rgb(250, 156, 156);
+  background: rgb(45, 88, 41);
   color: white;
   cursor: pointer;
   transition: 0.15s;
@@ -130,6 +135,16 @@ input[type="submit"]:hover {
 .card > p {
   font-size: 1.1rem;
   margin-bottom: 20px;
+}
+.post-photo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.post-photo img {
+  max-height: 35vh;
+  object-fit: cover;
+  object-position: center;
 }
 .edit-container {
   display: flex;

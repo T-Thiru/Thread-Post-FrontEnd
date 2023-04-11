@@ -77,6 +77,12 @@ const Post = ({ post }) => {
       ) : (
         <p>{newMessage ? newMessage : post.message}</p>
       )}
+      {post.photo?.secure_url && (
+        <div className="post-photo">
+          <img src={post.photo?.secure_url} alt="post photo" />
+        </div>
+      )}
+
       <div className="icons-part">
         <LikePost post={post} userId={user._id} />
         {isAuthor && (

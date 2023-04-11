@@ -5,36 +5,53 @@ import { createPost, getPosts } from "../feature/post.slice";
 
 const NewPost = ({ token }) => {
   const [message, setMessage] = useState("");
+  const [newPostPic, setNewPostPic] = useState();
   const user = useSelector((state) => state.user.userData);
   const dispatch = useDispatch();
 
   const handleForm = (e) => {
     e.preventDefault();
 
-    const data = {
-      message,
-      author: user._id,
-      // ID provisoir
-      // _id: Date.now(),
-    };
+    const formData = new FormData();
+    formData.append("message", message);
+    formData.append("author", user._id);
 
-    axios.post("http://localhost:5000/post/", data, {
+    if (newPostPic) formData.append("picture", newPostPic);
+
+    axios.post("http://localhost:5000/post/", formData, {
       headers: {
         authorization: `Bearer ${token}`,
       },
     });
+    const data = {
+      message,
+      author: user._id,
+      _id: Date.now(),
+    };
     dispatch(createPost(data));
     // dispatch(getPosts());
     setMessage("");
+    setNewPostPic("");
   };
 
   return (
     <form onSubmit={(e) => handleForm(e)} className="new-post-container">
-      <textarea
-        placeholder=" Votre Message ici"
-        onChange={(e) => setMessage(e.target.value)}
-        value={message}
-      ></textarea>
+      <div className="new-post">
+        <textarea
+          placeholder=" Votre Message ici"
+          onChange={(e) => setMessage(e.target.value)}
+          value={message}
+        ></textarea>
+        <label>
+          <h3>Photo:</h3>
+        </label>
+        <input
+          type="file"
+          onChange={(e) => {
+            setNewPostPic(e.target.files[0]);
+          }}
+        />
+      </div>
       <input type="submit" value="Envoyer" />
     </form>
   );
