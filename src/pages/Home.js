@@ -5,6 +5,9 @@ import NewPost from "../components/NewPost";
 import Thread from "../components/Thread";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../feature/user.slice";
+import { Box } from "@mui/material";
+import NavBar from "../components/NavBar";
+import HomeBar from "../components/HomeBar";
 
 const Home = ({ setToken, token }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -29,25 +32,28 @@ const Home = ({ setToken, token }) => {
   return isLoading ? (
     <p>LOADING...</p>
   ) : (
-    <div className="app-container">
-      <div className="profile">
-        <h1>
-          Bonjour <span className="username">{user?.account?.username}</span>
-        </h1>
-        <img
-          className="avatar"
-          src={user.account?.avatar?.secure_url}
-          alt="profil"
-          onClick={() => {
-            Cookies.remove("token");
-            setToken(null);
-            dispatch(getUser({}));
-          }}
-        />
-      </div>
-      <NewPost token={token} />
-      <Thread token={token} />
-    </div>
+    <Box>
+      <HomeBar />
+    </Box>
+    // <div className="app-container">
+    //   <div className="profile">
+    //     <h1>
+    //       Bonjour <span className="username">{user?.account?.username}</span>
+    //     </h1>
+    //     <img
+    //       className="avatar"
+    //       src={user.account?.avatar?.secure_url}
+    //       alt="profil"
+    //       onClick={() => {
+    //         Cookies.remove("token");
+    //         setToken(null);
+    //         dispatch(getUser({}));
+    //       }}
+    //     />
+    //   </div>
+    //   <NewPost token={token} />
+    //   <Thread />
+    // </div>
   );
 };
 

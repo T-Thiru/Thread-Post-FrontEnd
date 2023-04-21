@@ -79,7 +79,7 @@ const Post = ({ post }) => {
       )}
       {post.photo?.secure_url && (
         <div className="post-photo">
-          <img src={post.photo?.secure_url} alt="post photo" />
+          <img src={post.photo?.secure_url} alt="post" />
         </div>
       )}
 

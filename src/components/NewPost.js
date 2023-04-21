@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { createPost, getPosts } from "../feature/post.slice";
+import { createPost } from "../feature/post.slice";
 
 const NewPost = ({ token }) => {
   const [message, setMessage] = useState("");
@@ -33,6 +33,7 @@ const NewPost = ({ token }) => {
     setMessage("");
     setNewPostPic("");
   };
+  console.log(newPostPic);
 
   return (
     <form onSubmit={(e) => handleForm(e)} className="new-post-container">

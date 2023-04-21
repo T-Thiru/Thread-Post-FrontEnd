@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import SignUP from "./pages/SignUp";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import Intro from "./pages/Intro";
 
 const App = () => {
   const [token, setToken] = useState(Cookies.get("token") || null);
@@ -20,12 +21,13 @@ const App = () => {
       {token ? (
         <Home setToken={setToken} token={token} />
       ) : (
-        <Router>
-          <Routes>
-            <Route path="/" element={<Login setToken={setToken} />} />
-            <Route path="/signup" element={<SignUP setToken={setToken} />} />
-          </Routes>
-        </Router>
+        // <Router>
+        //   <Routes>
+        //     <Route path="/" element={<Login setToken={setToken} />} />
+        //     <Route path="/signup" element={<SignUP setToken={setToken} />} />
+        //   </Routes>
+        // </Router>
+        <Home />
       )}
     </>
   );
