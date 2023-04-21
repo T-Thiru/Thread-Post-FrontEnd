@@ -8,6 +8,7 @@ import {
   Badge,
   Autocomplete,
   InputAdornment,
+  Avatar,
 } from "@mui/material";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
@@ -37,7 +38,7 @@ const HomeBar = () => {
   ];
 
   return (
-    <AppBar position="fixed">
+    <AppBar position="sticky">
       <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
         <Typography
           variant="h5"
@@ -54,35 +55,24 @@ const HomeBar = () => {
           options={top100Films}
           sx={{ width: 300, bgcolor: "white", borderRadius: 1 }}
           size="small"
-          label="search"
           renderInput={(params) => (
-            <TextField
-              variant="outlined"
-              {...params}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <Search />
-                  </InputAdornment>
-                ),
-              }}
-            />
+            <TextField {...params} label="Search..." variant="outlined" />
           )}
         />
 
         <Box sx={{ display: "flex", gap: 1 }}>
-          <IconButton sx={{ color: "white" }}>
+          <IconButton sx={{ color: "inherit" }}>
             <Badge badgeContent={4} color="error">
               <MailIcon />
             </Badge>
           </IconButton>
-          <IconButton sx={{ color: "white" }}>
+          <IconButton sx={{ color: "inherit" }}>
             <Badge badgeContent={17} color="error">
               <NotificationsIcon />
             </Badge>
           </IconButton>
-          <IconButton sx={{ color: "white" }}>
-            <AccountCircle />
+          <IconButton sx={{ color: "inherit" }}>
+            <Avatar alt="" src="" />
           </IconButton>
         </Box>
       </Toolbar>

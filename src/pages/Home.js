@@ -5,9 +5,11 @@ import NewPost from "../components/NewPost";
 import Thread from "../components/Thread";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../feature/user.slice";
-import { Box } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import NavBar from "../components/NavBar";
 import HomeBar from "../components/HomeBar";
+import Menu from "../components/Menu";
+import Details from "../components/Details";
 
 const Home = ({ setToken, token }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -34,6 +36,11 @@ const Home = ({ setToken, token }) => {
   ) : (
     <Box>
       <HomeBar />
+      <Stack direction="row" justifyContent="space-between" spacing={3}>
+        <Menu />
+        <Thread />
+        <Details />
+      </Stack>
     </Box>
     // <div className="app-container">
     //   <div className="profile">

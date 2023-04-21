@@ -1,3 +1,4 @@
+import { Box } from "@mui/material";
 import axios from "axios";
 import React, { useEffect } from "react";
 import Post from "./Post";
@@ -21,13 +22,16 @@ const Thread = () => {
   }, [dispatch, posts]);
 
   return (
-    <div className="thread-container">
-      {posts &&
-        posts
-          .slice()
-          .sort((a, b) => b.createdAt.localeCompare(a.createdAt))
-          .map((post) => <Post key={post._id} post={post} user={user} />)}
-    </div>
+    <Box bgcolor="gray" flex={4}>
+      Threads
+    </Box>
+    // <div className="thread-container">
+    //   {posts &&
+    //     posts
+    //       .slice()
+    //       .sort((a, b) => b.createdAt.localeCompare(a.createdAt))
+    //       .map((post) => <Post key={post._id} post={post} user={user} />)}
+    // </div>
   );
 };
 
