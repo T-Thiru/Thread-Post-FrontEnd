@@ -9,14 +9,18 @@ import {
   Autocomplete,
   InputAdornment,
   Avatar,
+  Menu,
+  MenuItem,
 } from "@mui/material";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import ConnectWithoutContactIcon from "@mui/icons-material/ConnectWithoutContact";
-import React from "react";
+import React, { useState } from "react";
 import { Search } from "@mui/icons-material";
 const HomeBar = () => {
+  const [open, setOpen] = useState(false);
+
   const top100Films = [
     { label: "The Shawshank Redemption", year: 1994 },
     { label: "The Godfather", year: 1972 },
@@ -43,6 +47,7 @@ const HomeBar = () => {
         <Typography
           variant="h5"
           fontWeight={800}
+          marginRight={2}
           sx={{ display: { xs: "none", sm: "block" } }}
         >
           ThiruBook
@@ -53,7 +58,7 @@ const HomeBar = () => {
         <Autocomplete
           id="combo-box-demo"
           options={top100Films}
-          sx={{ width: 300, bgcolor: "white", borderRadius: 1 }}
+          sx={{ width: "50vw", bgcolor: "white", borderRadius: 1 }}
           size="small"
           renderInput={(params) => (
             <TextField {...params} label="Search..." variant="outlined" />
@@ -71,9 +76,27 @@ const HomeBar = () => {
               <NotificationsIcon />
             </Badge>
           </IconButton>
-          <IconButton sx={{ color: "inherit" }}>
+          <IconButton sx={{ color: "inherit" }} onClick={(e) => setOpen(true)}>
             <Avatar alt="" src="" />
           </IconButton>
+          <Menu
+            id="demo-positioned-menu"
+            aria-labelledby="demo-positioned-button"
+            open={open}
+            onClose={(e) => setOpen(false)}
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+          >
+            <MenuItem>Profile</MenuItem>
+            <MenuItem>Settings</MenuItem>
+            <MenuItem>Logout</MenuItem>
+          </Menu>
         </Box>
       </Toolbar>
     </AppBar>

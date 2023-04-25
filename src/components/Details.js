@@ -2,8 +2,8 @@ import { Box } from "@mui/material";
 
 const Details = () => {
   return (
-    <Box bgcolor="red" flex={1}>
-      details
+    <Box padding={2} flex={2} sx={{ display: { xs: "none", sm: "block" } }}>
+      <Box position="fixed">details</Box>
     </Box>
   );
 };
